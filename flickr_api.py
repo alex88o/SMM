@@ -1,13 +1,13 @@
 
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
-#title:		image_crawler.py
-#description:	Download the last public images from Flickr with associated information
+#title:		flickr_api.py
+#description:	Download a list of public images from Flickr with associated information
 #author:		Alessandro Ortis
-#date:		20170928
-#version:		0.1
-#usage:		python image_crawler.py <seqday>
-#notes:         if there are images in the DB, update daily information
+#date:		20171104
+#version:	0.1
+#usage:		python flickr_api.py 
+#notes:         
 #==============================================================================
 
 
@@ -66,10 +66,6 @@ def downloadImage(url, file_name):
     f.close()
 """    
 
-def mse(A,B):
-    err = np.sum((A.astype("float") - B.astype("float")) ** 2)
-    err /= float((A.shape[0]) * (A.shape[1]))
-    return err
     
 def isMissing(imagePath):
     for referenceImage in nullImages:
@@ -169,8 +165,6 @@ def photo_crawling(photo_id,):
 	# Download the photo and check if still available
 	img_path = "images/"+photo_id   
 	httpRes = urllib.urlretrieve(photo_url, img_path)
-	# Questa funzione usa urllib2     
-	#downloadImage(photo_url,img_path)    
 	abs_path = os.path.abspath(img_path)
 		
 	check = isMissing(img_path)
@@ -180,7 +174,7 @@ def photo_crawling(photo_id,):
 		os.remove(abs_path)
 		abs_path = os.path.abspath("missing/"+photo_id)            
 	elif os.stat(abs_path).st_size < 10000:
-	# Discard images with size lower than 10Mb
+	# Discard images with size lower than 10Kb
 		copyfile(abs_path, "missing/"+photo_id)
 		os.remove(abs_path)
 		abs_path = os.path.abspath("missing/"+photo_id)            
@@ -337,4 +331,4 @@ oauth_verifier=u'1103dab7cc7d9c5e'
 flickr = flickrapi.FlickrAPI(api_key, api_secret, format='parsed-json')
 """ END SETTINGS """	
 
-photos_analysis([u'36717094514',u'36783353383', u'23601757988', u'36783729883', u'36783687273'])
+photos_analysis([u'37474303502',u'36717094514',u'36783353383', u'23601757988', u'36783729883', u'36783687273'])
