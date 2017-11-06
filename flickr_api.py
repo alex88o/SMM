@@ -3,7 +3,7 @@
 #!/usr/bin/env python
 #title:		flickr_api.py
 #description:	Download a list of public images from Flickr with associated information
-#author:		Alessandro Ortis
+#author:	Alessandro Ortis
 #date:		20171104
 #version:	0.1
 #usage:		python flickr_api.py 
@@ -40,31 +40,6 @@ def find_by_size(size,path):
             if os.stat(path_name).st_size > size:
                 result.append(f)
     return result
-
-"""
-def downloadImage(url, file_name):
-    
-    u = urllib2.urlopen(url)
-    f = open(file_name, 'wb')
-    meta = u.info()
-    file_size = int(meta.getheaders("Content-Length")[0])
-    print "\nDownloading: %s Bytes: %s" % (file_name, file_size)
-    
-    file_size_dl = 0
-    block_sz = 8192
-    while True:
-        buffer = u.read(block_sz)
-        if not buffer:
-            break
-    
-        file_size_dl += len(buffer)
-        f.write(buffer)
-        status = r"%10d  [%3.2f%%]" % (file_size_dl, file_size_dl * 100. / file_size)
-        status = status + chr(8)*(len(status)+1)
-        print "\n"+status,
-    
-    f.close()
-"""    
 
     
 def isMissing(imagePath):
@@ -332,3 +307,6 @@ flickr = flickrapi.FlickrAPI(api_key, api_secret, format='parsed-json')
 """ END SETTINGS """	
 
 photos_analysis([u'37474303502',u'36717094514',u'36783353383', u'23601757988', u'36783729883', u'36783687273'])
+
+
+
